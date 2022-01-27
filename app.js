@@ -22,7 +22,7 @@ let favMovie4 = (paramHere) => {
 };
 
 let favMovie5 = (paramHere) => {
-  // my autoformatter is adding parentheses around this parameter
+  // my autoformatter is adding parentheses around this parameter, but it can be declared without parentheses, since it requires only 1 parameter
   console.log(
     `this is an arrow function with one ${paramHere} and no parentheses around the parameter`
   );
@@ -36,7 +36,9 @@ let favMovie6 = (paramHere, paramTwo) => {
 
 let getFirstName = (firstName) => {
   // this function is given the first name, then logs the first name
-  console.log(`The first name is ${firstName}`);
+  console.log(
+    `The first name is ${firstName}, I was just passed a nice easy single argument`
+  );
 };
 
 let getFirstNameConcise = (stringHere) => {
@@ -44,23 +46,62 @@ let getFirstNameConcise = (stringHere) => {
   // these 'substrings' are returned as an array.
   // [0] at the end will call the first substring from the array
   let firstName = stringHere.split(" ")[0];
-  console.log(`The first name is ${firstName}`);
+  console.log(
+    `The first name is ${firstName}, I was just passed a string, which i did some magic on to get just the first name`
+  );
 };
 
 getFirstName("eric");
 getFirstNameConcise("Eric Moran");
 
-console.log("-----------------------");
+console.log("Object literals below:");
 
-let doMath = (x, y) => {
-  //*! this is not working
-  let exponent = x ^ y;
-  let product = x * y;
-  let objectLiteral = {
-    exponent,
-    product,
-  };
-  return { exponent, product };
+let myMathObject = {
+  getExponent: (x, y) => {
+    return x ** y;
+  },
+
+  getProduct: (x, y) => {
+    return x * y;
+  },
 };
 
-doMath(2, 3);
+console.log(
+  `This is me calling the getExponent method (but really it is a property) from myMathObject, it should be 8: ${myMathObject.getExponent(
+    2,
+    3
+  )}`
+);
+
+console.log(
+  `This is me calling the getProduct method (but really it is a property) from myMathObject, it should be 6: ${myMathObject.getProduct(
+    2,
+    3
+  )}`
+);
+
+console.log("Cool spread stuff below");
+
+let spreadSyntaxFunc = (name, location, favFood) => {
+  console.log(
+    `Hi, my name is ${name}, I live in ${location}, and my favorite food is ${favFood}`
+  );
+};
+
+let thisArray = ["Ervin Howell", "Andrew's nightmares", "template literals"];
+
+spreadSyntaxFunc(...thisArray); // i do not use [...thisArray], instead the elipses go before the array name
+
+let myNameVariable = "Eric Moran";
+
+let notAnotherFunction = (param) => {
+  let aNewArray = [...myNameVariable];
+  // spreading through an array gives each item from that array
+  // spreading through a string gives each character from that string
+
+  for (let i = 0; i < aNewArray.length; i++) {
+    console.log(`${aNewArray[i]} is the value at index: ${i}`);
+  }
+};
+
+notAnotherFunction(myNameVariable);
